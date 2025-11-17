@@ -2,16 +2,18 @@
 const links = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
-  { href: "#blog", label: "Blog" },
+  { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
 const navId = "primary-navigation";
+const navToggleId = "primary-nav-toggle";
 ---
 <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
-  <nav class="container flex h-14 items-center justify-between gap-4">
+  <nav class="container flex h-14 items-center justify-between gap-4" data-nav-root>
     <a href="/" class="font-semibold tracking-tight">demo-portfolio.example</a>
     <button
       type="button"
+      id={navToggleId}
       class="inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium md:hidden"
       aria-expanded="false"
       aria-controls={navId}
@@ -26,7 +28,7 @@ const navId = "primary-navigation";
     </button>
     <div
       id={navId}
-      class="hidden w-full flex-col items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-sm md:flex md:w-auto md:flex-row md:items-center md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none dark:border-white/15 dark:bg-gray-900/90"
+      class="flex w-full flex-col items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-sm md:w-auto md:flex-row md:items-center md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none dark:border-white/15 dark:bg-gray-900/90"
       data-nav-menu
     >
       {links.map(link => (
@@ -39,26 +41,31 @@ const navId = "primary-navigation";
 </header>
 <script is:inline>
   if (typeof window !== 'undefined') {
-    const toggle = document.querySelector('[data-nav-toggle]');
-    const menu = document.querySelector('[data-nav-menu]');
+    const nav = document.querySelector('[data-nav-root]');
+    if (!nav) {
+      return;
+    }
 
-    if (toggle && menu) {
+    const toggle = nav.querySelector('[data-nav-toggle]');
+    const menu = nav.querySelector('[data-nav-menu]');
+    const navOpenClass = 'nav-is-open';
+
+    if (toggle instanceof HTMLElement && menu) {
       const mediaQuery = window.matchMedia('(min-width: 768px)');
 
       const closeMenu = () => {
+        nav.classList.remove(navOpenClass);
         toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.add('hidden');
       };
 
       const openMenu = () => {
+        nav.classList.add(navOpenClass);
         toggle.setAttribute('aria-expanded', 'true');
-        menu.classList.remove('hidden');
         menu.querySelector('a')?.focus();
       };
 
       toggle.addEventListener('click', () => {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        if (isExpanded) {
+        if (nav.classList.contains(navOpenClass)) {
           closeMenu();
         } else {
           openMenu();
@@ -66,7 +73,7 @@ const navId = "primary-navigation";
       });
 
       document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        if (event.key === 'Escape' && nav.classList.contains(navOpenClass)) {
           closeMenu();
           toggle.focus();
         }
@@ -77,25 +84,16 @@ const navId = "primary-navigation";
         if (!(target instanceof Node)) {
           return;
         }
-        const isInsideMenu = menu.contains(target);
-        const isToggle = toggle.contains(target);
-        if (!isInsideMenu && !isToggle && toggle.getAttribute('aria-expanded') === 'true') {
+        if (!nav.contains(target) && nav.classList.contains(navOpenClass)) {
           closeMenu();
         }
       });
 
       mediaQuery.addEventListener('change', query => {
         if (query.matches) {
-          menu.classList.remove('hidden');
-          toggle.setAttribute('aria-expanded', 'false');
-        } else {
           closeMenu();
         }
       });
-
-      if (mediaQuery.matches) {
-        menu.classList.remove('hidden');
-      }
     }
   }
 </script>

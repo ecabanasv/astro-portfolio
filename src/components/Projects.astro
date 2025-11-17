@@ -11,7 +11,12 @@ import { projects } from "../data/projects";
         <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{project.description}</p>
         <p class="mt-3 text-xs text-gray-500">Stack: {project.stack}</p>
         {project.url && (
-          <a href={project.url} target="_blank" rel="noopener" class="mt-4 inline-block text-sm underline underline-offset-4">
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline mt-4 w-full justify-center sm:w-auto"
+          >
             {project.ctaLabel ?? "Learn more"}
           </a>
         )}
