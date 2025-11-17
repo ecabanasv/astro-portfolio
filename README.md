@@ -8,7 +8,7 @@ This is a modern, fast, and responsive portfolio site built with [Astro](https:/
 
 ## Features
 
-- Clean, minimal, and professional design with light/dark mode
+- Clean, minimal, and professional design
 - Data-driven sections (Hero, Projects, Skills, Contact) managed from `src/data/`
 - Accessible mobile-first navigation with keyboard support
 - Optimized 404 page with lightweight illustration
@@ -76,7 +76,7 @@ astro-portfolio/
 | `npm run preview` | Preview production build                    |
 
 ## Roadmap Ideas
-
+- Light/dark mode
 - Generate Open Graph images per page
 - Add blog/testimonials using `src/content`
 - Integrate analytics and Lighthouse CI workflow
