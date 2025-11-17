@@ -1,0 +1,39 @@
+---
+import { hero } from '../data/hero';
+const { heading, description, highlights, primaryCta, secondaryCta, portrait } = hero;
+---
+<section id="about" class="section container">
+  <div class="grid items-center gap-8 md:grid-cols-2">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+        {heading}
+      </h1>
+      <p class="mt-4 text-lg text-gray-700 dark:text-gray-300">
+        {description}
+      </p>
+      <ul class="mt-5 flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400">
+        {highlights.map(item => (
+          <li>{item}</li>
+        ))}
+      </ul>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {primaryCta && (
+          <a href={primaryCta.href} class="btn btn-primary">{primaryCta.label}</a>
+        )}
+        {secondaryCta && (
+          <a href={secondaryCta.href} class="btn btn-outline">{secondaryCta.label}</a>
+        )}
+      </div>
+    </div>
+    <div class="flex justify-center md:justify-end">
+        <img
+          src={portrait.src}
+          alt={portrait.alt}
+          class="h-60 w-60 rounded-full border border-gray-200 object-cover shadow-sm dark:border-gray-800"
+          loading="lazy"
+          width={portrait.width}
+          height={portrait.height}
+        />
+    </div>
+  </div>
+</section>

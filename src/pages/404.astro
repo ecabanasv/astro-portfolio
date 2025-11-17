@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="404 · Page not found" description="We couldn't find the page you were looking for.">
+  <section class="flex min-h-[80vh] flex-col items-center justify-center gap-8 text-center">
+    <img
+      src="/404-llama.svg"
+      alt="A confused llama illustration indicating the page is missing"
+      width="220"
+      height="180"
+      loading="lazy"
+      class="mx-auto h-auto w-[min(220px,60vw)]"
+    />
+    <div class="space-y-3">
+      <h1 class="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Oops, this cloud is empty.</h1>
+      <p class="text-base text-gray-600 dark:text-gray-300">The page you're after has drifted away. Let's head back to where things make sense.</p>
+    </div>
+    <a href="/" class="btn btn-primary">Back to homepage</a>
+  </section>
+</Layout>

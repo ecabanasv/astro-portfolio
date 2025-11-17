@@ -1,0 +1,101 @@
+---
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Projects" },
+  { href: "#blog", label: "Blog" },
+  { href: "#contact", label: "Contact" },
+];
+const navId = "primary-navigation";
+---
+<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
+  <nav class="container flex h-14 items-center justify-between gap-4">
+    <a href="/" class="font-semibold tracking-tight">demo-portfolio.example</a>
+    <button
+      type="button"
+      class="inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium md:hidden"
+      aria-expanded="false"
+      aria-controls={navId}
+      data-nav-toggle
+    >
+      <span>Menu</span>
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 7h16" />
+        <path d="M4 12h16" />
+        <path d="M4 17h16" />
+      </svg>
+    </button>
+    <div
+      id={navId}
+      class="hidden w-full flex-col items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-sm md:flex md:w-auto md:flex-row md:items-center md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none dark:border-white/15 dark:bg-gray-900/90"
+      data-nav-menu
+    >
+      {links.map(link => (
+        <a href={link.href} class="w-full rounded-md px-2 py-1 text-left text-gray-700 hover:bg-gray-50 hover:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:text-gray-100 dark:hover:bg-white/10 md:w-auto md:bg-transparent md:px-0 md:py-0 md:hover:bg-transparent md:hover:underline">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+<script is:inline>
+  if (typeof window !== 'undefined') {
+    const toggle = document.querySelector('[data-nav-toggle]');
+    const menu = document.querySelector('[data-nav-menu]');
+
+    if (toggle && menu) {
+      const mediaQuery = window.matchMedia('(min-width: 768px)');
+
+      const closeMenu = () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.add('hidden');
+      };
+
+      const openMenu = () => {
+        toggle.setAttribute('aria-expanded', 'true');
+        menu.classList.remove('hidden');
+        menu.querySelector('a')?.focus();
+      };
+
+      toggle.addEventListener('click', () => {
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          closeMenu();
+          toggle.focus();
+        }
+      });
+
+      document.addEventListener('click', event => {
+        const target = event.target;
+        if (!(target instanceof Node)) {
+          return;
+        }
+        const isInsideMenu = menu.contains(target);
+        const isToggle = toggle.contains(target);
+        if (!isInsideMenu && !isToggle && toggle.getAttribute('aria-expanded') === 'true') {
+          closeMenu();
+        }
+      });
+
+      mediaQuery.addEventListener('change', query => {
+        if (query.matches) {
+          menu.classList.remove('hidden');
+          toggle.setAttribute('aria-expanded', 'false');
+        } else {
+          closeMenu();
+        }
+      });
+
+      if (mediaQuery.matches) {
+        menu.classList.remove('hidden');
+      }
+    }
+  }
+</script>

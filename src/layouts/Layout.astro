@@ -1,0 +1,27 @@
+---
+import "../styles/global.css";
+import Head from "../components/Head.astro";
+import { siteMetadata } from "../data/head";
+
+const {
+  title: incomingTitle,
+  description: incomingDescription,
+  ...rest
+} = Astro.props;
+
+const title = incomingTitle ?? siteMetadata.title;
+const description = incomingDescription ?? siteMetadata.description;
+---
+<html lang="en" class="min-h-full">
+  <head>
+    <Head title={title} description={description} {...rest} />
+  </head>
+  <body class="min-h-screen">
+    <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:rounded-md focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black px-3 py-1">Skip to content</a>
+    <slot name="beforeMain" />
+    <main class="mx-auto max-w-6xl p-6">
+      <slot />
+    </main>
+    <slot name="afterMain" />
+  </body>
+</html>

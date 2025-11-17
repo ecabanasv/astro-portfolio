@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="180" viewBox="0 0 220 180" role="img" aria-labelledby="title desc">
+  <title id="title">Lost Llama doodle</title>
+  <desc id="desc">A friendly llama shrugging to indicate a missing page.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#A5B4FC" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0.25" />
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="200" height="160" rx="32" fill="url(#bg)" />
+  <ellipse cx="110" cy="138" rx="54" ry="18" fill="#E0E7FF" opacity="0.65" />
+  <g stroke="#312E81" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="#EEF2FF">
+    <path d="M70 126c-8-28 0-52 14-64 10-9 26-10 36 0 14 12 22 36 14 64" />
+    <path d="M86 64c-8-20-4-32 0-36 4-4 8 0 10 6 2 6 4 18-2 28" />
+    <path d="M134 64c8-20 4-32 0-36-4-4-8 0-10 6s-4 18 2 28" />
+  </g>
+  <g fill="#312E81">
+    <circle cx="92" cy="88" r="6" />
+    <circle cx="128" cy="88" r="6" />
+    <path d="M100 114c8 10 20 10 28 0" stroke="#312E81" stroke-width="6" stroke-linecap="round" fill="none" />
+    <path d="M88 102c-6 4-10 4-14 0" stroke="#312E81" stroke-width="6" stroke-linecap="round" fill="none" />
+    <path d="M146 102c6 4 10 4 14 0" stroke="#312E81" stroke-width="6" stroke-linecap="round" fill="none" />
+  </g>
+  <text x="110" y="38" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" fill="#312E81">404?</text>
+</svg>
