@@ -1,11 +1,18 @@
 export type JsonLd = Record<string, unknown>;
 
 const repoSite = process.env.GITHUB_PAGES_URL?.replace(/\/+$/, '');
+const repoParts = process.env.GITHUB_REPOSITORY?.split('/') ?? [];
+const githubOwner = repoParts[0];
+const githubRepo = repoParts[1];
+const githubPagesSite =
+  githubOwner && githubRepo
+    ? `https://${githubOwner}.github.io/${githubRepo}/`
+    : undefined;
 const defaultSite = repoSite
   ? repoSite.endsWith('/')
     ? repoSite
     : `${repoSite}/`
-  : 'https://demo-portfolio.example/';
+  : githubPagesSite ?? 'https://demo-portfolio.example/';
 
 const assetBase = new URL(defaultSite).href;
 
