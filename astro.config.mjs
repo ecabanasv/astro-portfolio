@@ -3,9 +3,20 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+const repoParts = process.env.GITHUB_REPOSITORY?.split('/') ?? [];
+const githubOwner = repoParts[0];
+const githubRepo = repoParts[1];
+
+const defaultSite = githubOwner && githubRepo
+  ? `https://${githubOwner}.github.io/${githubRepo}/`
+  : 'https://demo-portfolio.example';
+const site = process.env.GITHUB_PAGES_URL ?? defaultSite;
+const base = process.env.ASTRO_BASE ?? (githubRepo ? `/${githubRepo}/` : '/');
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://demo-portfolio.example",
+  base,
+  site,
   vite: {
     plugins: [tailwindcss()]
   }

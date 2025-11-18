@@ -75,6 +75,12 @@ astro-portfolio/
 | `npm run build`   | Build for production                        |
 | `npm run preview` | Preview production build                    |
 
+## GitHub Pages deployment
+
+- `astro.config.mjs` now derives `base`/`site` from `GITHUB_REPOSITORY` when the build runs inside GitHub Actions. Locally you can override those values with `ASTRO_BASE` (e.g. `ASTRO_BASE=/portfolio-astro/ npm run build`) and `GITHUB_PAGES_URL` if you need a different canonical URL.
+- Push the branch you want to publish (usually `main`) and let the workflow at `.github/workflows/gh-pages.yml` install dependencies, run `npm run build`, and deploy `dist/` to the `gh-pages` branch automatically via `peaceiris/actions-gh-pages@v5`. The action uses the `GITHUB_TOKEN` secret supplied by the runner.
+- After the first successful deploy, go to the repository’s Settings → Pages and choose `gh-pages` as the source (or set a custom domain there). If you want to serve from a custom domain, also set that value in `GITHUB_PAGES_URL` so metadata tags reference the right origin.
+
 ## Roadmap Ideas
 - Light/dark mode
 - Generate Open Graph images per page
