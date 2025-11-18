@@ -74,7 +74,19 @@ astro-portfolio/
 | `npm run dev`         | Start local dev server                                   |
 | `npm run build`       | Build for production                                     |
 | `npm run preview`     | Preview production build                                 |
+| `npm run check`       | Run Astro's type checker to validate components          |
+| `npm run lint`        | Run `astro check` followed by ESLint (`@typescript-eslint`) |
 | `npm run check:canonical` | Verify canonical link tags in the generated HTML (run after `npm run build`) |
+
+## Quality Assurance
+
+Run the same checks that CI runs before opening a PR:
+
+```sh
+npm run lint
+```
+
+This command first executes `npm run check` (Astro + TypeScript type safety) and then runs ESLint with the shared config. There are no automated tests in this template yet, so linting + type checking is the primary QA signal.
 
 ## Roadmap Ideas
 - Light/dark mode
