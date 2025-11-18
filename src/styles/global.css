@@ -33,6 +33,12 @@
   .container { @apply mx-auto px-4 sm:px-6 lg:px-8; }
   .section { @apply py-16 sm:py-20; }
 
+  @media (max-width: 767px) {
+    [data-nav-root]:not(.nav-is-open) [data-nav-menu] {
+      display: none;
+    }
+  }
+
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors duration-200 focus-visible:outline-none;
   }
@@ -55,7 +61,8 @@
     @apply inline-flex h-7 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-xs font-semibold leading-none transition-colors duration-200 border border-gray-300 bg-gray-50 text-gray-700 dark:border-white/15 dark:bg-white/[0.07] dark:text-white/90;
   }
   .chip:focus-visible {
-    box-shadow: 0 0 0 2px rgba(28, 100, 242, 0.35), 0 0 0 4px rgba(28, 100, 242, 0.2);
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
   }
   .chip--nowrap { white-space: nowrap; }
 
