@@ -4,13 +4,13 @@ Live demo: [pending](#)
 
 ## Overview
 
-This is a modern, fast, and responsive portfolio site built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/). It serves as a blank canvas for showcasing prototypes, technical walkthroughs, or creative work across any domain. Every section is configurable via simple data files, so you can swap skills, projects, and CTAs without touching layout code.
+This is a modern, fast, and responsive portfolio site built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/). I'm building it in public as a long-term learning playground—experimenting with layouts, content, and UI patterns while documenting what works. Every section is configurable via simple data files so anyone studying along can tinker freely, suggest improvements, or fork ideas without diving into structural code each time.
 
 ## Features
 
 - Clean, minimal, and professional design
 - Data-driven sections (Hero, Projects, Skills, Contact) managed from `src/data/`
-- Accessible mobile-first navigation with keyboard support
+- Accessible mobile-first navigation with keyboard support (still evolving)
 - Optimized 404 page with lightweight illustration
 - SEO-ready metadata (Open Graph, Twitter Cards, JSON-LD) and smooth scroll
 - Built-in Tailwind utility layer with brand variables and focus states
@@ -84,9 +84,4 @@ astro-portfolio/
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE) unless otherwise specified.
-
----
-
-**Author:** @ecabanasv
-For questions or opportunities, feel free to reach out via the contact section on the site.
+This project is open source and available under the [MIT License](LICENSE) unless otherwise specified. It's intentionally early-stage and meant to keep evolving, so any feedback, experiments, or PRs—no matter how small—are appreciated. If you spot a better approach or want to propose a tweak, open an issue or discussion so we can learn and improve together.
