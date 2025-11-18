@@ -26,7 +26,9 @@
     outline: 2px solid var(--color-brand);
     outline-offset: 3px;
   }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
 }
 
 @layer components {
@@ -56,6 +58,8 @@
   }
   .chip:focus-visible {
     box-shadow: 0 0 0 2px rgba(28, 100, 242, 0.35), 0 0 0 4px rgba(28, 100, 242, 0.2);
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
   }
   .chip--nowrap { white-space: nowrap; }
 
@@ -64,5 +68,12 @@
   }
   .cert > span {
     @apply mt-0.5 block text-gray-500 dark:text-gray-400;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
   }
 }
