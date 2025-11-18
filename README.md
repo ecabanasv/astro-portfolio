@@ -1,6 +1,6 @@
 # Astro Portfolio Template
 
-Live demo: [pending](#)
+Live demo: [link](https://ecabanasv.github.io/astro-portfolio/)
 
 ## Overview
 
