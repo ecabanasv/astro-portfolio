@@ -2,8 +2,14 @@
 import { Image } from '@astrojs/image/components';
 import Layout from '../layouts/Layout.astro';
 import llamaIllustration from '../assets/404-llama.svg';
+import { buildSeoProps } from '../utils/seo';
+
+const seo = buildSeoProps(Astro, {
+  title: '404 · Page not found',
+  description: "We couldn't find the page you were looking for.",
+});
 ---
-<Layout title="404 · Page not found" description="We couldn't find the page you were looking for.">
+<Layout {...seo}>
   <section class="flex min-h-[80vh] flex-col items-center justify-center gap-8 text-center">
     <Image
       src={llamaIllustration}
