@@ -1,13 +1,16 @@
 ---
+import { Image } from '@astrojs/image/components';
 import Layout from '../layouts/Layout.astro';
+import llamaIllustration from '../assets/404-llama.svg';
 ---
 <Layout title="404 · Page not found" description="We couldn't find the page you were looking for.">
   <section class="flex min-h-[80vh] flex-col items-center justify-center gap-8 text-center">
-    <img
-      src="/404-llama.svg"
+    <Image
+      src={llamaIllustration}
       alt="A confused llama illustration indicating the page is missing"
-      width="220"
-      height="180"
+      widths={[220, 330]}
+      format="png"
+      sizes="(min-width: 768px) 220px, 60vw"
       loading="lazy"
       class="mx-auto h-auto w-[min(220px,60vw)]"
     />

@@ -5,11 +5,22 @@ const links = [
   { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
-const navId = "primary-navigation";
-const navToggleId = "primary-nav-toggle";
+const navId = 'primary-navigation';
+const navToggleId = 'primary-nav-toggle';
+const scriptModule = import.meta.glob('../components/NavbarToggle.ts', {
+  eager: true,
+  import: 'default',
+  query: '?url'
+}) as Record<string, string>;
+const navbarScript = scriptModule['../components/NavbarToggle.ts'];
 ---
-<header class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
-  <nav class="container flex h-14 items-center justify-between gap-4" data-nav-root>
+<header
+  class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80"
+  data-nav-root
+  data-nav-menu={navId}
+  data-nav-toggle={navToggleId}
+>
+  <nav class="container flex h-14 items-center justify-between gap-4">
     <a href="/" class="font-semibold tracking-tight">demo-portfolio.example</a>
     <button
       type="button"
@@ -17,7 +28,6 @@ const navToggleId = "primary-nav-toggle";
       class="inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium md:hidden"
       aria-expanded="false"
       aria-controls={navId}
-      data-nav-toggle
     >
       <span>Menu</span>
       <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -29,7 +39,6 @@ const navToggleId = "primary-nav-toggle";
     <div
       id={navId}
       class="flex w-full flex-col items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 text-sm shadow-sm md:w-auto md:flex-row md:items-center md:gap-4 md:border-0 md:bg-transparent md:p-0 md:shadow-none dark:border-white/15 dark:bg-gray-900/90"
-      data-nav-menu
     >
       {links.map(link => (
         <a href={link.href} class="w-full rounded-md px-2 py-1 text-left text-gray-700 hover:bg-gray-50 hover:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 dark:text-gray-100 dark:hover:bg-white/10 md:w-auto md:bg-transparent md:px-0 md:py-0 md:hover:bg-transparent md:hover:underline">
@@ -39,61 +48,4 @@ const navToggleId = "primary-nav-toggle";
     </div>
   </nav>
 </header>
-<script is:inline>
-  if (typeof window !== 'undefined') {
-    const nav = document.querySelector('[data-nav-root]');
-    if (!nav) {
-      return;
-    }
-
-    const toggle = nav.querySelector('[data-nav-toggle]');
-    const menu = nav.querySelector('[data-nav-menu]');
-    const navOpenClass = 'nav-is-open';
-
-    if (toggle instanceof HTMLElement && menu) {
-      const mediaQuery = window.matchMedia('(min-width: 768px)');
-
-      const closeMenu = () => {
-        nav.classList.remove(navOpenClass);
-        toggle.setAttribute('aria-expanded', 'false');
-      };
-
-      const openMenu = () => {
-        nav.classList.add(navOpenClass);
-        toggle.setAttribute('aria-expanded', 'true');
-        menu.querySelector('a')?.focus();
-      };
-
-      toggle.addEventListener('click', () => {
-        if (nav.classList.contains(navOpenClass)) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && nav.classList.contains(navOpenClass)) {
-          closeMenu();
-          toggle.focus();
-        }
-      });
-
-      document.addEventListener('click', event => {
-        const target = event.target;
-        if (!(target instanceof Node)) {
-          return;
-        }
-        if (!nav.contains(target) && nav.classList.contains(navOpenClass)) {
-          closeMenu();
-        }
-      });
-
-      mediaQuery.addEventListener('change', query => {
-        if (query.matches) {
-          closeMenu();
-        }
-      });
-    }
-  }
-</script>
+<script type="module" src={navbarScript} defer></script>
