@@ -8,12 +8,13 @@ const links = [
 const navId = "primary-navigation";
 ---
 <header class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur dark:border-gray-800 dark:bg-gray-950/80">
-  <nav class="container flex h-14 items-center justify-between gap-4">
+  <nav class="container flex h-14 items-center justify-between gap-4" aria-label="Primary navigation">
     <a href="/" class="font-semibold tracking-tight">demo-portfolio.example</a>
     <button
       type="button"
       class="inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium md:hidden"
       aria-expanded="false"
+      aria-label="Open navigation menu"
       aria-controls={navId}
       data-nav-toggle
     >
