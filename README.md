@@ -62,7 +62,7 @@ astro-portfolio/
 ## Customization
 
 - **Content:** Update text and CTAs from the data modules in `src/data/` (`hero.ts`, `projects.ts`, `skills.ts`, `contact.ts`, `head.ts`).
-- **Assets:** Replace `public/cv.pdf`, `public/avatar.png`, and `public/404-llama.svg` with personal files.
+- **Assets:** Replace `public/cv.pdf`, `src/assets/avatar.png`, and `src/assets/404-llama.svg` with personal files.
 - **Styling:** Tweak tokens in `src/styles/global.css` (brand colors, focus styles) or extend Tailwind config.
 - **Metadata:** Defaults live in `src/data/head.ts`; individual pages can override via `Layout` props.
 - **Navigation:** Adjust links in `src/components/Navbar.astro` and corresponding sections.

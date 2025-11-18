@@ -36,7 +36,7 @@ export const hero: HeroData = {
     href: '#contact'
   },
   portrait: {
-    src: '/avatar.png',
+    src: 'avatar.png',
     alt: 'Anonymous professional portrait illustration',
     width: 160,
     height: 160

@@ -1,6 +1,18 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from '@astrojs/image/components';
 import { hero } from '../data/hero';
+
 const { heading, description, highlights, primaryCta, secondaryCta, portrait } = hero;
+const portraitAssets = import.meta.glob('../assets/*.{png,jpg,jpeg,webp,avif}', {
+  eager: true,
+  import: 'default'
+}) as Record<string, ImageMetadata>;
+const portraitAsset = portraitAssets[`../assets/${portrait.src}`];
+if (!portraitAsset) {
+  throw new Error(`Portrait asset ../assets/${portrait.src} was not found.`);
+}
+const portraitWidths = [160, 240, 320];
 ---
 <section id="about" class="section container">
   <div class="grid items-center gap-8 md:grid-cols-2">
@@ -26,14 +38,15 @@ const { heading, description, highlights, primaryCta, secondaryCta, portrait } =
       </div>
     </div>
     <div class="flex justify-center md:justify-end">
-        <img
-          src={portrait.src}
-          alt={portrait.alt}
-          class="h-60 w-60 rounded-full border border-gray-200 object-cover shadow-sm dark:border-gray-800"
-          loading="lazy"
-          width={portrait.width}
-          height={portrait.height}
-        />
+      <Image
+        src={portraitAsset}
+        alt={portrait.alt}
+        class="h-60 w-60 rounded-full border border-gray-200 object-cover shadow-sm dark:border-gray-800"
+        widths={portraitWidths}
+        format="png"
+        sizes="(min-width: 768px) 15rem, 60vw"
+        loading="lazy"
+      />
     </div>
   </div>
 </section>
