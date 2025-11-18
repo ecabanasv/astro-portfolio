@@ -64,16 +64,17 @@ astro-portfolio/
 - **Content:** Update text and CTAs from the data modules in `src/data/` (`hero.ts`, `projects.ts`, `skills.ts`, `contact.ts`, `head.ts`).
 - **Assets:** Replace `public/cv.pdf`, `src/assets/avatar.png`, and `src/assets/404-llama.svg` with personal files.
 - **Styling:** Tweak tokens in `src/styles/global.css` (brand colors, focus styles) or extend Tailwind config.
-- **Metadata:** Defaults live in `src/data/head.ts`; individual pages can override via `Layout` props.
+- **Metadata:** Defaults live in `src/data/site-metadata.json` (typed via `src/data/head.ts`); individual pages can override via `Layout` props.
 - **Navigation:** Adjust links in `src/components/Navbar.astro` and corresponding sections.
 
 ## Scripts
 
-| Command           | Description                                 |
-|-------------------|---------------------------------------------|
-| `npm run dev`     | Start local dev server                      |
-| `npm run build`   | Build for production                        |
-| `npm run preview` | Preview production build                    |
+| Command               | Description                                              |
+|-----------------------|----------------------------------------------------------|
+| `npm run dev`         | Start local dev server                                   |
+| `npm run build`       | Build for production                                     |
+| `npm run preview`     | Preview production build                                 |
+| `npm run check:canonical` | Verify canonical link tags in the generated HTML (run after `npm run build`) |
 
 ## Roadmap Ideas
 - Light/dark mode

@@ -3,14 +3,34 @@
 import { siteMetadata } from '../data/head';
 
 const {
-  title,
-  description,
-  url,
-  image,
-  icon,
-  fonts,
-  jsonLdPerson
-} = { ...siteMetadata, ...Astro.props };
+  title: incomingTitle,
+  description: incomingDescription,
+  url: incomingUrl,
+  image: incomingImage,
+  icon: incomingIcon,
+  fonts: incomingFonts,
+  jsonLdPerson: incomingJsonLd,
+} = Astro.props;
+
+const ensureAbsoluteUrl = (value: string) => {
+  try {
+    return new URL(value, siteMetadata.url).toString();
+  } catch {
+    return value;
+  }
+};
+
+const title = incomingTitle ?? siteMetadata.title;
+const description = incomingDescription ?? siteMetadata.description;
+const defaultCanonical = new URL(Astro.url.pathname, siteMetadata.url).toString();
+const url = ensureAbsoluteUrl(incomingUrl ?? defaultCanonical);
+const image = ensureAbsoluteUrl(incomingImage ?? siteMetadata.image);
+const icon = incomingIcon ?? siteMetadata.icon;
+const fonts = incomingFonts ?? siteMetadata.fonts;
+const jsonLdPerson = {
+  ...siteMetadata.jsonLdPerson,
+  ...(incomingJsonLd ?? {}),
+};
 ---
 <>
   <meta charset="utf-8" />
@@ -19,7 +39,7 @@ const {
   <meta name="description" content={description} />
   <link rel="canonical" href={url} />
   {fonts?.map(font => (
-    <link rel={font.rel} href={font.href} crossorigin={font.crossorigin} />
+    <link key={`${font.rel}-${font.href}`} rel={font.rel} href={font.href} crossorigin={font.crossorigin} />
   ))}
   <!-- OG / Twitter -->
   <meta property="og:title" content={title} />
