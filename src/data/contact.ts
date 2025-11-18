@@ -44,7 +44,7 @@ export const contactSection: ContactSection = {
     {
       id: 'download',
       label: 'Download CV',
-      href: '/cv.pdf',
+      href: 'cv.pdf',
       ariaLabel: 'Download CV',
       variant: 'primary',
       download: true

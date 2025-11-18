@@ -29,14 +29,14 @@ export const hero: HeroData = {
   ],
   primaryCta: {
     label: 'Download Sample CV',
-    href: '/cv.pdf'
+    href: 'cv.pdf'
   },
   secondaryCta: {
     label: 'Book a walkthrough',
     href: '#contact'
   },
   portrait: {
-    src: '/avatar.png',
+    src: 'avatar.png',
     alt: 'Anonymous professional portrait illustration',
     width: 160,
     height: 160
