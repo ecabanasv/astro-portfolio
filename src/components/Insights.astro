@@ -1,0 +1,30 @@
+---
+import { insights } from "../data/insights";
+---
+<section id="insights" class="section container">
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 dark:text-emerald-200">Insights</p>
+      <h2 class="mt-2 text-2xl md:text-3xl font-semibold">Short reads you can adapt</h2>
+    </div>
+    <a href="#contact" class="btn btn-outline text-sm">Request a tailored playbook</a>
+  </div>
+
+  <div class="mt-8 grid gap-6 md:grid-cols-3">
+    {insights.map(post => (
+      <article class="card flex flex-col gap-3">
+        <div class="flex items-center gap-3 text-xs font-semibold text-gray-600 dark:text-gray-300">
+          <span class="chip chip--nowrap">{post.tag}</span>
+          <span class="text-gray-500">{post.date}</span>
+        </div>
+        <h3 class="text-xl">{post.title}</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300">{post.summary}</p>
+        <div class="mt-auto pt-2">
+          <a href={post.url ?? '#contact'} class="text-sm font-semibold text-blue-700 underline-offset-4 hover:underline dark:text-emerald-200">
+            {post.url ? 'Read' : 'Share this with me'}
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
