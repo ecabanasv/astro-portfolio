@@ -2,13 +2,11 @@
 import { siteMetadata } from '../data/head';
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#impact", label: "Impact" },
-  { href: "#projects", label: "Projects" },
-  { href: "#skills", label: "Skills" },
-  { href: "#insights", label: "Insights" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", id: "about", label: "About" },
+  { href: "#resume", id: "resume", label: "Resume" },
+  { href: "#portfolio", id: "portfolio", label: "Portfolio" },
+  { href: "#blog", id: "blog", label: "Blog" },
+  { href: "#contact", id: "contact", label: "Contact" },
 ];
 const navId = "primary-navigation";
 const homeHref = (() => {
@@ -53,7 +51,8 @@ const basePath = (() => {
         <a
           href={link.href}
           class="nav-link"
-          aria-current={link.href === "#about" ? "page" : undefined}
+          data-nav-link={link.id}
+          aria-current={link.id === "about" ? "page" : undefined}
         >
           {link.label}
         </a>
@@ -65,6 +64,14 @@ const basePath = (() => {
   if (typeof window !== 'undefined') {
     const toggle = document.querySelector('[data-nav-toggle]');
     const menu = document.querySelector('[data-nav-menu]');
+    const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+    const sections = [
+      { id: 'about', el: document.querySelector('#about') },
+      { id: 'resume', el: document.querySelector('#resume') },
+      { id: 'portfolio', el: document.querySelector('#portfolio') },
+      { id: 'blog', el: document.querySelector('#blog') },
+      { id: 'contact', el: document.querySelector('#contact') }
+    ].filter(item => item.el);
 
     if (toggle && menu) {
       const mediaQuery = window.matchMedia('(min-width: 768px)');
@@ -79,6 +86,11 @@ const basePath = (() => {
         menu.classList.remove('hidden');
         menu.querySelector('a')?.focus();
       };
+      const closeOnLink = () => {
+        if (window.innerWidth < 768) {
+          closeMenu();
+        }
+      };
 
       toggle.addEventListener('click', () => {
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
@@ -88,6 +100,7 @@ const basePath = (() => {
           openMenu();
         }
       });
+      navLinks.forEach(link => link.addEventListener('click', closeOnLink));
 
       document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
@@ -107,6 +120,28 @@ const basePath = (() => {
           closeMenu();
         }
       });
+
+      const setActive = id => {
+        navLinks.forEach(link => {
+          const isActive = link.dataset.navLink === id;
+          link.setAttribute('aria-current', isActive ? 'page' : undefined);
+        });
+      };
+
+      if ('IntersectionObserver' in window && sections.length) {
+        const observer = new IntersectionObserver(
+          entries => {
+            const visible = entries
+              .filter(e => e.isIntersecting)
+              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (visible?.target?.id) {
+              setActive(visible.target.id);
+            }
+          },
+          { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.2, 0.5, 1] }
+        );
+        sections.forEach(section => observer.observe(section.el));
+      }
 
       mediaQuery.addEventListener('change', query => {
         if (query.matches) {

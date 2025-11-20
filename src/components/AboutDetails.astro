@@ -1,0 +1,37 @@
+---
+import { hero } from "../data/hero";
+
+const areas = [
+  { title: 'Service journeys', description: 'Prepare personas, routes, and agent UI flows to validate end-to-end experience.' },
+  { title: 'AI copilots', description: 'Draft triage, summarize, and reply helpers you can swap for your own models.' },
+  { title: 'Dashboards', description: 'Curate KPIs and alerts that help stakeholders read adoption and quality quickly.' },
+  { title: 'Integrations', description: 'Show webhooks, APIs, and data syncs that tie CRM, knowledge, and chat together.' },
+];
+---
+<section class="section container" aria-labelledby="about-more">
+  <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+    <div class="space-y-4">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 dark:text-emerald-200">About me</p>
+      <h2 id="about-more" class="text-2xl md:text-3xl font-semibold">Clear demos for quick decisions</h2>
+      <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+        {hero.description}
+      </p>
+      <div class="mt-4 flex flex-wrap gap-2.5 text-sm text-gray-700 dark:text-gray-200">
+        {hero.highlights.map(item => (
+          <span class="chip">{item}</span>
+        ))}
+      </div>
+    </div>
+    <div class="space-y-4">
+      <h3 class="text-lg font-semibold">What I'm doing</h3>
+      <div class="grid gap-3 sm:grid-cols-2">
+        {areas.map(area => (
+          <article class="card">
+            <h4 class="text-base font-semibold">{area.title}</h4>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{area.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

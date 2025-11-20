@@ -1,13 +1,16 @@
 ---
 import { projects } from "../data/projects";
 ---
-<section id="projects" class="section container">
+<section id="portfolio" class="section container">
   <div class="flex items-center justify-between gap-4 flex-wrap">
-    <h2 class="mb-4">Projects & Demos</h2>
-    <p class="text-sm text-gray-600 dark:text-gray-400">Hands-on previews of automations, AI copilots, and dashboards.</p>
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 dark:text-emerald-200">Portfolio</p>
+      <h2 class="mt-2">Selected work</h2>
+    </div>
+    <p class="text-sm text-gray-600 dark:text-gray-400">Demos and mockups you can adapt for your own pilots.</p>
   </div>
 
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {projects.map(project => (
       <article class="card flex flex-col gap-4 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl">
         <div class="project-thumb">
