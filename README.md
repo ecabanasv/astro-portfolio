@@ -8,12 +8,12 @@ This is a modern, fast, and responsive portfolio site built with [Astro](https:/
 
 ## Features
 
-- Clean, minimal, and professional design
-- Data-driven sections (Hero, Projects, Skills, Contact) managed from `src/data/`
-- Accessible mobile-first navigation with keyboard support (still evolving)
-- Optimized 404 page with lightweight illustration
-- SEO-ready metadata (Open Graph, Twitter Cards, JSON-LD) and smooth scroll
-- Built-in Tailwind utility layer with brand variables and focus states
+- Modern, responsive layout with sticky nav + scrollspy
+- Sections: Hero, About (“What I’m doing”), Resume (experience + education/certs + skills grid), Portfolio, Blog/Insights, Contact (map + form + quick links)
+- Data-driven content from `src/data/*.ts` (hero, projects, skills, timeline, contact, head)
+- Accessible mobile-first navigation, focus styles, and smooth scrolling
+- SEO-ready metadata (OG, Twitter, JSON-LD) and optimized 404 page
+- Tailwind utility layer with brand tokens and reusable chips/cards/buttons
 
 ## Tech Stack
 
@@ -28,8 +28,8 @@ This is a modern, fast, and responsive portfolio site built with [Astro](https:/
 astro-portfolio/
 |- public/             # Static assets (images, favicon, cv.pdf, 404 illustration, etc.)
 |- src/
-|   |- components/     # Astro components (Navbar, Hero, Projects, Skills, Contact, Footer, Head)
-|   |- data/           # Centralized content (hero, projects, skills, contact, metadata)
+|   |- components/     # Navbar, Hero, AboutDetails, Resume, Projects (Portfolio), Insights (Blog), Contact, Footer, Head
+|   |- data/           # Content: head.ts, hero.ts, projects.ts, skills.ts, timeline.ts, contact.ts
 |   |- layouts/        # Main layout wrapper loading global styles & metadata
 |   |- pages/          # Astro pages (index, 404)
 |   |- styles/         # Global CSS (Tailwind base & custom utilities)
@@ -61,11 +61,11 @@ astro-portfolio/
 
 ## Customization
 
-- **Content:** Update text and CTAs from the data modules in `src/data/` (`hero.ts`, `projects.ts`, `skills.ts`, `contact.ts`, `head.ts`).
-- **Assets:** Replace `public/cv.pdf`, `public/avatar.png`, and `public/404-llama.svg` with personal files.
-- **Styling:** Tweak tokens in `src/styles/global.css` (brand colors, focus styles) or extend Tailwind config.
-- **Metadata:** Defaults live in `src/data/head.ts`; individual pages can override via `Layout` props.
-- **Navigation:** Adjust links in `src/components/Navbar.astro` and corresponding sections.
+- **Content:** Edit `src/data/*.ts` (hero, projects, skills, timeline, contact, head) to change copy, CTAs, and metadata.
+- **Sections:** Adjust structure/copy in `src/components/` (AboutDetails, Resume, Projects, Insights, Contact, etc.).
+- **Assets:** Replace `public/cv.pdf`, `public/avatar.png`, `public/og-image.jpg`, and `public/404-llama.svg` as needed.
+- **Styling:** Tweak tokens/utilities in `src/styles/global.css` or extend `tailwind.config.js` for colors/spacing.
+- **Navigation:** Update links in `src/components/Navbar.astro` to match your sections.
 
 ## Scripts
 
