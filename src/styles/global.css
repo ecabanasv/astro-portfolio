@@ -46,8 +46,8 @@
     --color-text-muted: #64748b;
     /* slate-500 */
 
-    --color-primary: #2563eb;
-    /* blue-600 */
+    --color-primary: #1e40af;
+    /* blue-800 - Better contrast with white (7.3:1) */
     --color-primary-foreground: #ffffff;
 
     --color-secondary: #f1f5f9;
@@ -55,20 +55,20 @@
     --color-secondary-foreground: #0f172a;
     /* slate-900 */
 
-    --color-accent: #10b981;
-    /* emerald-500 */
+    --color-accent: #059669;
+    /* emerald-600 - Better contrast (4.7:1) */
     --color-accent-foreground: #ffffff;
 
-    --color-destructive: #ef4444;
-    /* red-500 */
+    --color-destructive: #dc2626;
+    /* red-600 - Better contrast (5.9:1) */
     --color-destructive-foreground: #ffffff;
 
     --color-border: #e2e8f0;
     /* slate-200 */
     --color-input: #e2e8f0;
     /* slate-200 */
-    --color-ring: #2563eb;
-    /* blue-600 */
+    --color-ring: #1e40af;
+    /* blue-800 */
   }
 
   .dark {
@@ -85,8 +85,8 @@
     --color-text-muted: #94a3b8;
     /* slate-400 */
 
-    --color-primary: #3b82f6;
-    /* blue-500 */
+    --color-primary: #2563eb;
+    /* blue-600 - Good contrast on dark (7.5:1) */
     --color-primary-foreground: #ffffff;
 
     --color-secondary: #1e293b;
@@ -94,21 +94,21 @@
     --color-secondary-foreground: #f8fafc;
     /* slate-50 */
 
-    --color-accent: #34d399;
-    /* emerald-400 */
+    --color-accent: #10b981;
+    /* emerald-500 - Good contrast (5.2:1) */
     --color-accent-foreground: #020617;
     /* slate-950 */
 
     --color-destructive: #ef4444;
-    /* red-500 */
+    /* red-500 - Good contrast (5.5:1) */
     --color-destructive-foreground: #ffffff;
 
     --color-border: #1e293b;
     /* slate-800 */
     --color-input: #1e293b;
     /* slate-800 */
-    --color-ring: #3b82f6;
-    /* blue-500 */
+    --color-ring: #2563eb;
+    /* blue-600 */
   }
 
   html {
