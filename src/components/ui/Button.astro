@@ -1,0 +1,45 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
+    variant?: "primary" | "secondary" | "outline" | "ghost";
+    size?: "sm" | "md" | "lg";
+    href?: string;
+    class?: string;
+}
+
+const {
+    variant = "primary",
+    size = "md",
+    href,
+    class: className,
+    ...rest
+} = Astro.props;
+
+const baseStyles =
+    "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background";
+
+const variants = {
+    primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+    outline:
+        "border border-input bg-background hover:bg-surface-muted hover:text-accent",
+    ghost: "hover:bg-surface-muted hover:text-accent",
+};
+
+const sizes = {
+    sm: "h-9 px-3 text-xs",
+    md: "h-10 px-4 py-2 text-sm",
+    lg: "h-11 px-8 text-base",
+};
+
+const classes = [baseStyles, variants[variant], sizes[size], className].join(
+    " ",
+);
+
+const Element = href ? "a" : "button";
+---
+
+<Element href={href} class={classes} {...rest}>
+    <slot />
+</Element>

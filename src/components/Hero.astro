@@ -1,68 +1,116 @@
 ---
-import { hero } from '../data/hero';
-const { heading, description, highlights, primaryCta, secondaryCta, portrait } = hero;
----
-<section id="about" class="section container relative overflow-hidden">
-  <div class="absolute -left-10 top-0 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl md:left-10 md:top-10"></div>
-  <div class="absolute -right-10 bottom-0 h-64 w-64 rounded-full bg-emerald-400/10 blur-3xl"></div>
+import { hero } from "../data/hero";
+import Section from "./ui/Section.astro";
+import Button from "./ui/Button.astro";
+import Badge from "./ui/Badge.astro";
 
-  <div class="grid items-center gap-10 md:grid-cols-[1.2fr_0.9fr]">
-    <div class="relative z-10 space-y-6">
-      <p class="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 shadow-sm backdrop-blur dark:bg-white/[0.08] dark:text-emerald-200">
-        Salesforce · Service Cloud · AI
-      </p>
-      <h1>{heading}</h1>
-      <p class="max-w-2xl text-lg text-gray-700 dark:text-gray-200">
-        {description}
-      </p>
-      <ul class="mt-2 flex flex-wrap gap-2.5 text-sm text-gray-700 dark:text-gray-200">
-        {highlights.map(item => (
-          <li class="pill">
-            <svg class="h-4 w-4 text-blue-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 011.414-1.414L8.5 11.836l6.543-6.543a1 1 0 011.664.707z" clip-rule="evenodd" />
-            </svg>
-            <span>{item}</span>
-          </li>
-        ))}
+import BackgroundBlobs from "./ui/BackgroundBlobs.astro";
+
+const { heading, description, highlights, primaryCta, secondaryCta, portrait } =
+  hero;
+---
+
+<Section id="about" class="relative overflow-hidden">
+  <BackgroundBlobs />
+
+  <div class="grid items-center gap-12 md:grid-cols-2 lg:gap-20">
+    <div class="space-y-8">
+      <div class="space-y-4">
+        <Badge variant="accent" class="py-1 px-3 text-sm">
+          Salesforce · Service Cloud · AI
+        </Badge>
+
+        <h1
+          class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+        >
+          {heading}
+        </h1>
+
+        <p class="max-w-xl text-lg text-text-muted md:text-xl leading-relaxed">
+          {description}
+        </p>
+      </div>
+
+      <ul class="flex flex-wrap gap-3">
+        {
+          highlights.map((item) => (
+            <li class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-4 py-1.5 text-sm font-medium text-text-muted backdrop-blur-sm">
+              <svg
+                class="h-4 w-4 text-primary"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 011.414-1.414L8.5 11.836l6.543-6.543a1 1 0 011.664.707z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {item}
+            </li>
+          ))
+        }
       </ul>
-      <div class="flex flex-wrap gap-3">
-        {primaryCta && (
-          <a href={primaryCta.href} class="btn btn-primary">{primaryCta.label}</a>
-        )}
-        {secondaryCta && (
-          <a href={secondaryCta.href} class="btn btn-outline">{secondaryCta.label}</a>
-        )}
+
+      <div class="flex flex-wrap gap-4">
+        {
+          primaryCta && (
+            <Button href={primaryCta.href} size="lg">
+              {primaryCta.label}
+            </Button>
+          )
+        }
+        {
+          secondaryCta && (
+            <Button href={secondaryCta.href} variant="outline" size="lg">
+              {secondaryCta.label}
+            </Button>
+          )
+        }
       </div>
     </div>
 
-    <div class="relative z-10 flex justify-center md:justify-end">
-      <div class="relative">
-        <div class="absolute inset-0 -translate-y-2 scale-105 rounded-3xl bg-gradient-to-br from-blue-500/25 via-blue-400/15 to-emerald-400/30 blur-2xl"></div>
-        <div class="glass relative flex flex-col items-center gap-4 p-6 shadow-lg">
-          <div class="project-thumb w-56">
-            <div class="project-thumb__bar">
-              <span class="project-thumb__dot"></span>
-              <span class="project-thumb__dot"></span>
-              <span class="project-thumb__dot"></span>
+    <div class="relative flex justify-center md:justify-end">
+      <div class="relative aspect-square w-full max-w-md">
+        <!-- Decorative background for image -->
+        <div
+          class="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl bg-gradient-to-br from-primary/20 to-accent/20 blur-2xl"
+        >
+        </div>
+
+        <div
+          class="relative h-full w-full overflow-hidden rounded-3xl border border-border bg-surface/50 backdrop-blur-sm p-4 shadow-2xl"
+        >
+          <img
+            src={portrait.src}
+            alt={portrait.alt}
+            class="h-full w-full rounded-2xl object-cover"
+            loading="eager"
+            width={portrait.width}
+            height={portrait.height}
+          />
+
+          <!-- Floating status badge -->
+          <div class="absolute bottom-8 left-8 right-8">
+            <div
+              class="flex items-center gap-3 rounded-xl border border-white/20 bg-white/90 p-3 shadow-lg backdrop-blur-md dark:bg-black/80"
+            >
+              <span class="relative flex h-3 w-3">
+                <span
+                  class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"
+                ></span>
+                <span
+                  class="relative inline-flex h-3 w-3 rounded-full bg-accent"
+                ></span>
+              </span>
+              <span class="text-sm font-medium text-text"
+                >Available for walkthroughs</span
+              >
             </div>
-            <img
-              src={portrait.src}
-              alt={portrait.alt}
-              class="h-52 w-52 rounded-2xl border border-white/80 object-cover shadow-lg shadow-blue-500/20 dark:border-white/20"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-              sizes="(max-width: 768px) 65vw, 240px"
-              width={portrait.width}
-              height={portrait.height}
-            />
-          </div>
-          <div class="flex items-center gap-2 rounded-full border border-white/60 bg-white/90 px-3 py-1 text-xs font-medium text-gray-600 shadow-sm backdrop-blur dark:border-white/20 dark:bg-white/[0.08] dark:text-white/80">
-            <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_0_4px_rgba(22,242,179,0.18)]"></span>
-            Available for walkthroughs
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</Section>

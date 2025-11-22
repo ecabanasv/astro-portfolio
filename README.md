@@ -1,93 +1,111 @@
-# Astro Portfolio Template
+# Astro Portfolio
 
-Live demo: [link](https://ecabanasv.github.io/astro-portfolio/)
-
-## Overview
-
-This is a modern, fast, and responsive portfolio site built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/). I'm building it in public as a long-term learning playground—experimenting with layouts, content, and UI patterns while documenting what works. Every section is configurable via simple data files so anyone studying along can tinker freely, suggest improvements, or fork ideas without diving into structural code each time.
+A modern, high-performance portfolio template built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com), and TypeScript.
 
 ## Features
 
-- Modern, responsive layout with sticky nav + scrollspy
-- Sections: Hero, About (“What I’m doing”), Resume (experience + education/certs + skills grid), Portfolio, Blog/Insights, Contact (map + form + quick links)
-- Data-driven content from `src/data/*.ts` (hero, projects, skills, timeline, contact, head)
-- Accessible mobile-first navigation, focus styles, and smooth scrolling
-- SEO-ready metadata (OG, Twitter, JSON-LD) and optimized 404 page
-- Tailwind utility layer with brand tokens and reusable chips/cards/buttons
+- ⚡ **Fast & Lightweight**: Built with Astro for optimal performance.
+- 🎨 **Modern Design System**: Tailwind CSS v4 with semantic variables for easy theming.
+- 🌗 **Dark Mode**: Fully supported with a toggle switch and system preference detection.
+- ♿ **Accessible**: Semantic HTML, ARIA attributes, and keyboard navigation support.
+- 📱 **Responsive**: Looks great on all devices, from mobile to desktop.
+- 🔍 **SEO Optimized**: Open Graph tags, sitemap, and structured data (JSON-LD).
+- 🐳 **Docker Ready**: Includes Dockerfile and Compose setup for consistent environments.
+- 🧪 **Tested**: Unit testing setup with Vitest.
 
 ## Tech Stack
 
-- [Astro](https://astro.build/) (Static Site Generator)
-- [Tailwind CSS](https://tailwindcss.com/) (Utility-first CSS)
-- TypeScript + modern CSS modules
-- Node.js 20+
-
-## Folder Structure
-
-```
-astro-portfolio/
-|- public/             # Static assets (images, favicon, cv.pdf, 404 illustration, etc.)
-|- src/
-|   |- components/     # Navbar, Hero, AboutDetails, Resume, Projects (Portfolio), Insights (Blog), Contact, Footer, Head
-|   |- data/           # Content: head.ts, hero.ts, projects.ts, skills.ts, timeline.ts, contact.ts
-|   |- layouts/        # Main layout wrapper loading global styles & metadata
-|   |- pages/          # Astro pages (index, 404)
-|   |- styles/         # Global CSS (Tailwind base & custom utilities)
-|- astro.config.mjs    # Astro configuration
-|- tailwind.config.js  # Tailwind configuration
-|- package.json        # Project metadata & scripts
-\- tsconfig.json       # TypeScript configuration
-```
+- **Framework**: [Astro](https://astro.build)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) (v4 via `@tailwindcss/vite`)
+- **Language**: [TypeScript](https://www.typescriptlang.org)
+- **Icons**: Inline SVGs (Heroicons style)
+- **Fonts**: [Inter](https://fonts.google.com/specimen/Inter) & [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk)
+- **Testing**: [Vitest](https://vitest.dev) & [Testing Library](https://testing-library.com)
 
 ## Getting Started
 
-1. **Install dependencies**
-   ```sh
+### Prerequisites
+
+- Node.js (v20 or higher recommended)
+- npm (v10 or higher)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/astro-portfolio.git
+   cd astro-portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
    npm install
    ```
-2. **Start the development server**
-   ```sh
+
+3. Start the development server:
+   ```bash
    npm run dev
    ```
-   Visit [http://localhost:4321](http://localhost:4321)
-3. **Build for production**
-   ```sh
+
+4. Build for production:
+   ```bash
    npm run build
    ```
-4. **Preview the production build**
-   ```sh
+
+5. Preview the production build:
+   ```bash
    npm run preview
    ```
 
+## Docker
+
+You can run the project using Docker to ensure a consistent environment.
+
+```bash
+# Build and start the container
+docker-compose up --build
+```
+
+The site will be available at `http://localhost:4321`.
+
+## Testing
+
+Run unit tests to verify components:
+
+```bash
+npm run test
+```
+
+## Project Structure
+
+```
+src/
+├── components/   # UI components (Hero, Navbar, etc.)
+│   └── ui/       # Reusable primitives (Button, Card, Badge, Section)
+├── data/         # Content data files (TypeScript) - EDIT THESE
+├── layouts/      # Page layouts (Layout.astro)
+├── pages/        # Astro pages (routes)
+├── styles/       # Global styles and Tailwind config (@theme)
+└── tests/        # Unit tests
+```
+
 ## Customization
 
-- **Content:** Edit `src/data/*.ts` (hero, projects, skills, timeline, contact, head) to change copy, CTAs, and metadata.
-- **Sections:** Adjust structure/copy in `src/components/` (AboutDetails, Resume, Projects, Insights, Contact, etc.).
-- **Assets:** Replace `public/cv.pdf`, `public/avatar.png`, `public/og-image.jpg`, and `public/404-llama.svg` as needed.
-- **Styling:** Tweak tokens/utilities in `src/styles/global.css` or extend `tailwind.config.js` for colors/spacing.
-- **Navigation:** Update links in `src/components/Navbar.astro` to match your sections.
+### 1. Content
+Edit the files in `src/data/` to update your portfolio content. This is the primary place for your personal information.
+- `hero.ts`: Main headline and introduction.
+- `projects.ts`: Your portfolio projects.
+- `skills.ts`: Skills and certifications.
+- `contact.ts`: Contact info and form settings.
 
-## Scripts
+### 2. Styling & Theme
+The project uses **Tailwind CSS v4**. The theme configuration is located in `src/styles/global.css` under the `@theme` directive.
+- Change the CSS variables in `:root` and `.dark` to update the color palette.
+- The system uses semantic names like `--color-primary`, `--color-surface`, etc.
 
-| Command           | Description                                 |
-|-------------------|---------------------------------------------|
-| `npm run dev`     | Start local dev server                      |
-| `npm run build`   | Build for production                        |
-| `npm run preview` | Preview production build                    |
-
-## GitHub Pages deployment
-
-- `astro.config.mjs` now derives `base`/`site` from `GITHUB_REPOSITORY` when the build runs inside GitHub Actions. Locally you can override those values with `ASTRO_BASE` (e.g. `ASTRO_BASE=/portfolio-astro/ npm run build`) and `GITHUB_PAGES_URL` if you need a different canonical URL.
-- Push the branch you want to publish (usually `main`) and let the workflow at `.github/workflows/gh-pages.yml` install dependencies, run `npm run build`, and deploy `dist/` to the `gh-pages` branch automatically via `peaceiris/actions-gh-pages@v5`. The action uses the `GITHUB_TOKEN` secret supplied by the runner.
-- After the first successful deploy, go to the repository’s Settings → Pages and choose `gh-pages` as the source (or set a custom domain there). If you want to serve from a custom domain, also set that value in `GITHUB_PAGES_URL` so metadata tags reference the right origin.
-
-## Roadmap Ideas
-- Light/dark mode
-- Generate Open Graph images per page
-- Add blog/testimonials using `src/content`
-- Integrate analytics and Lighthouse CI workflow
-- Convert assets to responsive `astro:assets`
+### 3. Icons
+The project uses inline SVGs for best performance. You can replace them with your preferred icon set (e.g., `astro-icon` or another library) if desired.
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE) unless otherwise specified. It's intentionally early-stage and meant to keep evolving, so any feedback, experiments, or PRs—no matter how small—are appreciated. If you spot a better approach or want to propose a tweak, open an issue or discussion so we can learn and improve together.
+MIT

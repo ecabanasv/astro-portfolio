@@ -1,21 +1,46 @@
-<footer class="border-t border-white/60 bg-white/60 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
-  <div class="container flex flex-col gap-6 py-10 text-sm text-gray-600 dark:text-gray-300">
-    <div class="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-      <div>
-        <p class="text-base font-semibold text-gray-900 dark:text-white">Let’s design your next pilot.</p>
-        <p class="text-gray-600 dark:text-gray-300">Automations, AI copilots, and dashboards ready to demo.</p>
+---
+import Button from "./ui/Button.astro";
+---
+
+<footer class="border-t border-border bg-surface/30 backdrop-blur-sm mt-auto">
+  <div class="container py-12">
+    <div
+      class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8"
+    >
+      <div class="text-center md:text-left space-y-2">
+        <h3 class="text-xl font-bold">Let’s design your next pilot.</h3>
+        <p class="text-text-muted">
+          Automations, AI copilots, and dashboards ready to demo.
+        </p>
       </div>
-      <div class="flex flex-wrap items-center gap-3">
-        <a href="#contact" class="btn btn-primary text-sm">Start the conversation</a>
-        <a href="mailto:hello@demo-portfolio.example" class="btn btn-ghost text-sm">Email me</a>
+      <div class="flex gap-4">
+        <Button href="#contact">Start the conversation</Button>
+        <Button href="mailto:hello@demo-portfolio.example" variant="ghost"
+          >Email me</Button
+        >
       </div>
     </div>
-    <div class="flex flex-col-reverse items-start justify-between gap-4 border-t border-gray-200 pt-4 text-xs leading-5 dark:border-white/10 md:flex-row md:items-center">
+
+    <div
+      class="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-text-muted"
+    >
       <p>&copy; {new Date().getFullYear()} demo-portfolio.example</p>
-      <nav class="flex items-center gap-4">
-        <a href="https://www.linkedin.com/in/demo-portfolio" target="_blank" rel="noopener" class="hover:underline">LinkedIn</a>
-        <a href="https://github.com/demo-portfolio" target="_blank" rel="noopener" class="hover:underline">GitHub</a>
-        <a href="#about" class="hover:underline">Back to top</a>
+      <nav class="flex gap-6">
+        <a
+          href="https://www.linkedin.com/in/demo-portfolio"
+          target="_blank"
+          rel="noopener"
+          class="hover:text-primary transition-colors">LinkedIn</a
+        >
+        <a
+          href="https://github.com/demo-portfolio"
+          target="_blank"
+          rel="noopener"
+          class="hover:text-primary transition-colors">GitHub</a
+        >
+        <a href="#about" class="hover:text-primary transition-colors"
+          >Back to top</a
+        >
       </nav>
     </div>
   </div>

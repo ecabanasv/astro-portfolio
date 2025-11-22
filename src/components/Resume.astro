@@ -1,67 +1,87 @@
 ---
 import { certifications, skillCategories } from "../data/skills";
 import { timeline } from "../data/timeline";
+import Section from "./ui/Section.astro";
+import Card from "./ui/Card.astro";
+import Badge from "./ui/Badge.astro";
 ---
-<section id="resume" class="section container relative overflow-hidden pb-12">
-  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-900/25 via-blue-600/10 to-emerald-500/8 blur-3xl"></div>
-  <div class="absolute top-6 right-10 -z-10 h-32 w-32 rounded-full bg-blue-500/15 blur-3xl"></div>
 
-  <div class="flex items-start justify-between gap-3">
-    <div>
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700 dark:text-emerald-200">Resume</p>
-      <h2 class="mt-2 text-2xl md:text-3xl font-semibold">Snapshot</h2>
-    </div>
+<Section id="resume" class="relative overflow-hidden">
+  <!-- Background decoration -->
+  <div
+    class="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl"
+  >
   </div>
 
-  <div class="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-    <div class="space-y-4">
-      <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Experience</h3>
-      <div class="space-y-4">
-        {timeline.map(item => (
-          <article class="rounded-2xl border border-white/20 bg-white/70 p-5 shadow-lg shadow-blue-500/10 backdrop-blur dark:border-white/10 dark:bg-white/[0.05]">
-            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700 dark:text-emerald-200">{item.period}</p>
-            <h4 class="mt-2 text-xl font-semibold text-gray-900 dark:text-white">{item.title}</h4>
-            <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">{item.description}</p>
-            <div class="mt-3 flex flex-wrap gap-2">
-              {item.highlights.map(highlight => (
-                <span class="chip chip--nowrap">{highlight}</span>
-              ))}
-            </div>
-          </article>
-        ))}
+  <div class="mb-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-primary"
+      >Resume</span
+    >
+    <h2 class="mt-2 text-3xl md:text-4xl font-bold">Snapshot</h2>
+  </div>
+
+  <div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+    <div class="space-y-8">
+      <h3 class="text-2xl font-bold">Experience</h3>
+      <div class="space-y-6">
+        {
+          timeline.map((item) => (
+            <Card class="p-6 relative overflow-hidden group">
+              <div class="absolute top-0 left-0 w-1 h-full bg-primary/50 group-hover:bg-primary transition-colors" />
+              <span class="text-xs font-bold uppercase tracking-wide text-primary">
+                {item.period}
+              </span>
+              <h4 class="mt-1 text-xl font-bold">{item.title}</h4>
+              <p class="mt-3 text-text-muted leading-relaxed">
+                {item.description}
+              </p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {item.highlights.map((highlight) => (
+                  <Badge variant="secondary" class="text-xs">
+                    {highlight}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
+          ))
+        }
       </div>
     </div>
 
-    <div class="space-y-5">
+    <div class="space-y-10">
       <div>
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Education & Certs</h3>
-        <ul class="mt-3 space-y-3">
-          {certifications.map(cert => (
-            <li class="rounded-2xl border border-white/20 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.05]">
-              <div class="flex items-center gap-3">
-                <span class="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-blue-500 to-emerald-400 shadow-[0_0_0_6px_rgba(37,99,255,0.15)]"></span>
-                <span class="text-sm font-medium text-gray-800 dark:text-white">{cert}</span>
-              </div>
-            </li>
-          ))}
+        <h3 class="text-2xl font-bold mb-6">Education & Certs</h3>
+        <ul class="space-y-3">
+          {
+            certifications.map((cert) => (
+              <li class="flex items-center gap-3 rounded-lg border border-border bg-surface/50 p-3 text-sm font-medium">
+                <span class="h-2 w-2 rounded-full bg-accent shadow-[0_0_0_4px_rgba(var(--color-accent),0.2)]" />
+                {cert}
+              </li>
+            ))
+          }
         </ul>
       </div>
-    </div>
-  </div>
 
-  <div class="mt-6 space-y-4">
-    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Skills</h3>
-    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-      {skillCategories.map(category => (
-        <div class="rounded-2xl border border-white/20 bg-white/70 p-4 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/[0.05]">
-          <p class="text-sm font-semibold text-gray-800 dark:text-white">{category.title}</p>
-          <div class="mt-2 flex flex-wrap gap-2">
-            {category.items.map(item => (
-              <span class="chip">{item}</span>
-            ))}
-          </div>
+      <div>
+        <h3 class="text-2xl font-bold mb-6">Skills</h3>
+        <div class="space-y-4">
+          {
+            skillCategories.map((category) => (
+              <Card class="p-5 bg-surface/50">
+                <p class="font-bold mb-3">{category.title}</p>
+                <div class="flex flex-wrap gap-2">
+                  {category.items.map((item) => (
+                    <Badge variant="outline" class="bg-background">
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
+              </Card>
+            ))
+          }
         </div>
-      ))}
+      </div>
     </div>
   </div>
-</section>
+</Section>

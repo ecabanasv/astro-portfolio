@@ -1,0 +1,14 @@
+---
+interface Props {
+    id?: string;
+    class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<section id={id} class:list={["py-16 md:py-24 scroll-mt-16", className]}>
+    <div class="container">
+        <slot />
+    </div>
+</section>

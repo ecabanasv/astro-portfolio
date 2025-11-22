@@ -1,160 +1,129 @@
 ---
-import { siteMetadata } from '../data/head';
+import { siteMetadata } from "../data/head";
+import ThemeToggle from "./ThemeToggle.astro";
 
 const links = [
-  { href: "#about", id: "about", label: "About" },
-  { href: "#resume", id: "resume", label: "Resume" },
-  { href: "#portfolio", id: "portfolio", label: "Portfolio" },
-  { href: "#blog", id: "blog", label: "Blog" },
-  { href: "#contact", id: "contact", label: "Contact" },
+  { href: "#about", label: "About" },
+  { href: "#resume", label: "Resume" },
+  { href: "#portfolio", label: "Portfolio" },
+  { href: "#blog", label: "Blog" },
+  { href: "#contact", label: "Contact" },
 ];
-const navId = "primary-navigation";
-const homeHref = (() => {
-  try {
-    return new URL(".", siteMetadata.url).pathname;
-  } catch {
-    return "/";
-  }
-})();
-const basePath = (() => {
-  try {
-    return new URL(".", siteMetadata.url).pathname;
-  } catch {
-    return "/";
-  }
-})();
+
+const homeHref = "/";
 ---
-<header class="sticky top-0 z-50 border-b border-white/50 bg-white/70 backdrop-blur-xl transition dark:border-white/10 dark:bg-gray-950/70">
-  <nav class="container flex h-16 items-center justify-between gap-4" aria-label="Primary navigation">
-    <a href={homeHref} class="font-semibold tracking-tight text-gray-900 dark:text-white">demo-portfolio.example</a>
-    <button
-      type="button"
-      class="inline-flex items-center gap-2 rounded-md border border-transparent px-3 py-2 text-sm font-medium md:hidden"
-      aria-expanded="false"
-      aria-label="Open navigation menu"
-      aria-controls={navId}
-      data-nav-toggle
+
+<header
+  class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-colors"
+>
+  <div class="container flex h-16 items-center justify-between">
+    <a
+      href={homeHref}
+      class="flex items-center gap-2 font-display text-lg font-bold tracking-tight text-text hover:text-primary transition-colors"
     >
-      <span>Menu</span>
-      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M4 7h16" />
-        <path d="M4 12h16" />
-        <path d="M4 17h16" />
-      </svg>
-    </button>
-    <div
-      id={navId}
-      class="hidden w-full flex-col items-start gap-2 rounded-xl border border-white/50 bg-white/80 p-4 text-sm shadow-lg shadow-blue-500/5 backdrop-blur md:flex md:w-auto md:flex-row md:items-center md:gap-1 md:border-0 md:bg-transparent md:p-0 md:shadow-none dark:border-white/10 dark:bg-white/[0.05]"
-      data-nav-menu
+      {siteMetadata.title || "Portfolio"}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav
+      class="hidden md:flex md:items-center md:gap-6"
+      aria-label="Main navigation"
     >
-      {links.map(link => (
-        <a
-          href={link.href}
-          class="nav-link"
-          data-nav-link={link.id}
-          aria-current={link.id === "about" ? "page" : undefined}
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-text-muted hover:text-primary transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <div class="pl-2 border-l border-border ml-2">
+        <ThemeToggle />
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <div class="flex items-center gap-4 md:hidden">
+      <ThemeToggle />
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="inline-flex items-center justify-center rounded-md p-2 text-text-muted hover:bg-surface-muted hover:text-text focus:outline-none focus:ring-2 focus:ring-primary"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Toggle menu"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
         >
-          {link.label}
-        </a>
-      ))}
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
     </div>
-  </nav>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden" id="mobile-menu">
+    <div class="space-y-1 px-4 pb-3 pt-2 border-t border-border bg-background">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="block rounded-md px-3 py-2 text-base font-medium text-text-muted hover:bg-surface-muted hover:text-primary"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
 </header>
-<script is:inline>
-  if (typeof window !== 'undefined') {
-    const toggle = document.querySelector('[data-nav-toggle]');
-    const menu = document.querySelector('[data-nav-menu]');
-    const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
-    const sections = [
-      { id: 'about', el: document.querySelector('#about') },
-      { id: 'resume', el: document.querySelector('#resume') },
-      { id: 'portfolio', el: document.querySelector('#portfolio') },
-      { id: 'blog', el: document.querySelector('#blog') },
-      { id: 'contact', el: document.querySelector('#contact') }
-    ].filter(item => item.el);
 
-    if (toggle && menu) {
-      const mediaQuery = window.matchMedia('(min-width: 768px)');
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
 
-      const closeMenu = () => {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.add('hidden');
-      };
+  if (btn && menu) {
+    const toggleMenu = () => {
+      const isExpanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", (!isExpanded).toString());
+      menu.classList.toggle("hidden");
+    };
 
-      const openMenu = () => {
-        toggle.setAttribute('aria-expanded', 'true');
-        menu.classList.remove('hidden');
-        menu.querySelector('a')?.focus();
-      };
-      const closeOnLink = () => {
-        if (window.innerWidth < 768) {
-          closeMenu();
-        }
-      };
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
 
-      toggle.addEventListener('click', () => {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        if (isExpanded) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-      navLinks.forEach(link => link.addEventListener('click', closeOnLink));
-
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-          closeMenu();
-          toggle.focus();
-        }
-      });
-
-      document.addEventListener('click', event => {
-        const target = event.target;
-        if (!(target instanceof Node)) {
-          return;
-        }
-        const isInsideMenu = menu.contains(target);
-        const isToggle = toggle.contains(target);
-        if (!isInsideMenu && !isToggle && toggle.getAttribute('aria-expanded') === 'true') {
-          closeMenu();
-        }
-      });
-
-      const setActive = id => {
-        navLinks.forEach(link => {
-          const isActive = link.dataset.navLink === id;
-          link.setAttribute('aria-current', isActive ? 'page' : undefined);
-        });
-      };
-
-      if ('IntersectionObserver' in window && sections.length) {
-        const observer = new IntersectionObserver(
-          entries => {
-            const visible = entries
-              .filter(e => e.isIntersecting)
-              .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-            if (visible?.target?.id) {
-              setActive(visible.target.id);
-            }
-          },
-          { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.2, 0.5, 1] }
-        );
-        sections.forEach(section => observer.observe(section.el));
+    // Close on click outside
+    document.addEventListener("click", (event) => {
+      if (
+        !menu.classList.contains("hidden") &&
+        !menu.contains(event.target as Node) &&
+        !btn.contains(event.target as Node)
+      ) {
+        btn.setAttribute("aria-expanded", "false");
+        menu.classList.add("hidden");
       }
+    });
 
-      mediaQuery.addEventListener('change', query => {
-        if (query.matches) {
-          menu.classList.remove('hidden');
-          toggle.setAttribute('aria-expanded', 'false');
-        } else {
-          closeMenu();
-        }
-      });
-
-      if (mediaQuery.matches) {
-        menu.classList.remove('hidden');
+    // Close on Escape key
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !menu.classList.contains("hidden")) {
+        btn.setAttribute("aria-expanded", "false");
+        menu.classList.add("hidden");
+        btn.focus();
       }
-    }
+    });
   }
 </script>

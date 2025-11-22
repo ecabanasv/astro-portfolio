@@ -6,12 +6,26 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "astro": "^5.13.5",
     "tailwindcss": "^4.1.13"
+  },
+  "devDependencies": {
+    "vitest": "^1.0.0",
+    "jsdom": "^23.0.0",
+    "@testing-library/dom": "^9.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.12.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-astro": "^0.30.0"
   },
   "engines": {
     "node": "20.x",

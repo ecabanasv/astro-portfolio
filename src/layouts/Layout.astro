@@ -6,22 +6,45 @@ import { siteMetadata } from "../data/head";
 const {
   title: incomingTitle,
   description: incomingDescription,
+  lang = "en",
   ...rest
 } = Astro.props;
 
 const title = incomingTitle ?? siteMetadata.title;
 const description = incomingDescription ?? siteMetadata.description;
 ---
-<html lang="en" class="min-h-full">
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
   <head>
     <Head title={title} description={description} {...rest} />
+    <script is:inline>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
   </head>
-  <body class="min-h-screen">
-    <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:rounded-md focus:bg-black focus:text-white dark:focus:bg-white dark:focus:text-black px-3 py-1">Skip to content</a>
+  <body class="bg-background text-text min-h-screen flex flex-col">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md"
+    >
+      Skip to content
+    </a>
+
     <slot name="beforeMain" />
-    <main class="mx-auto max-w-[1280px] px-6 py-10">
+
+    <main id="main-content" class="flex-grow">
       <slot />
     </main>
+
     <slot name="afterMain" />
   </body>
 </html>
