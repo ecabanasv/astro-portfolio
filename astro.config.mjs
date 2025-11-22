@@ -10,15 +10,16 @@ const githubRepo = repoParts[1];
 // Only set absolute URL when deploying to GitHub Pages
 const defaultSite = githubOwner && githubRepo
   ? `https://${githubOwner}.github.io/${githubRepo}/`
-  : '';  // Empty string allows relative URLs for local development
+  : undefined;  // undefined allows Astro to use relative URLs
 const site = process.env.GITHUB_PAGES_URL ?? defaultSite;
 const base = process.env.ASTRO_BASE ?? (githubRepo ? `/${githubRepo}/` : '/');
 
 // https://astro.build/config
 export default defineConfig({
   base,
-  site,
+  ...(site && { site }),  // Only include site if it has a value
   vite: {
     plugins: [tailwindcss()]
   }
 });
+
