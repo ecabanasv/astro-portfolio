@@ -28,6 +28,7 @@ A modern, high-performance portfolio template built with [Astro](https://astro.b
 
 - Node.js (v20 or higher recommended)
 - npm (v10 or higher)
+- Docker Desktop (optional, for containerized development)
 
 ### Installation
 
