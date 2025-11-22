@@ -3,14 +3,12 @@
 ---
 
 <button
-    id="theme-toggle"
     type="button"
-    class="inline-flex items-center justify-center rounded-md p-2.5 text-text-muted hover:bg-surface-muted hover:text-text focus:outline-none focus:ring-2 focus:ring-primary"
+    class="theme-toggle inline-flex items-center justify-center rounded-md p-2.5 text-text-muted hover:bg-surface-muted hover:text-text focus:outline-none focus:ring-2 focus:ring-primary"
     aria-label="Toggle dark mode"
 >
     <svg
-        id="theme-toggle-dark-icon"
-        class="hidden h-5 w-5"
+        class="theme-toggle-dark-icon hidden h-5 w-5"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +18,7 @@
         ></path>
     </svg>
     <svg
-        id="theme-toggle-light-icon"
-        class="hidden h-5 w-5"
+        class="theme-toggle-light-icon hidden h-5 w-5"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -35,9 +32,9 @@
 
 <script is:inline>
     (function () {
-        const themeToggleBtn = document.getElementById("theme-toggle");
-        const darkIcon = document.getElementById("theme-toggle-dark-icon");
-        const lightIcon = document.getElementById("theme-toggle-light-icon");
+        const button = document.currentScript.previousElementSibling;
+        const darkIcon = button.querySelector(".theme-toggle-dark-icon");
+        const lightIcon = button.querySelector(".theme-toggle-light-icon");
 
         // Change the icons inside the button based on previous settings
         if (
@@ -50,10 +47,18 @@
             darkIcon.classList.remove("hidden");
         }
 
-        themeToggleBtn.addEventListener("click", function () {
-            // toggle icons inside button
-            darkIcon.classList.toggle("hidden");
-            lightIcon.classList.toggle("hidden");
+        button.addEventListener("click", function () {
+            // Toggle icons inside all theme toggle buttons
+            document
+                .querySelectorAll(".theme-toggle-dark-icon")
+                .forEach((icon) => {
+                    icon.classList.toggle("hidden");
+                });
+            document
+                .querySelectorAll(".theme-toggle-light-icon")
+                .forEach((icon) => {
+                    icon.classList.toggle("hidden");
+                });
 
             // if set via local storage previously
             if (localStorage.getItem("color-theme")) {
