@@ -46,8 +46,8 @@
     --color-text-muted: #64748b;
     /* slate-500 */
 
-    --color-primary: #1e40af;
-    /* blue-800 - Better contrast with white (7.3:1) */
+    --color-primary: #1e3a8a;
+    /* blue-900 - Maximum contrast (9.7:1) for text and buttons */
     --color-primary-foreground: #ffffff;
 
     --color-secondary: #f1f5f9;
@@ -55,20 +55,20 @@
     --color-secondary-foreground: #0f172a;
     /* slate-900 */
 
-    --color-accent: #059669;
-    /* emerald-600 - Better contrast (4.7:1) */
+    --color-accent: #047857;
+    /* emerald-700 - Better contrast (6.4:1) */
     --color-accent-foreground: #ffffff;
 
-    --color-destructive: #dc2626;
-    /* red-600 - Better contrast (5.9:1) */
+    --color-destructive: #b91c1c;
+    /* red-700 - Better contrast (7.6:1) */
     --color-destructive-foreground: #ffffff;
 
     --color-border: #e2e8f0;
     /* slate-200 */
     --color-input: #e2e8f0;
     /* slate-200 */
-    --color-ring: #1e40af;
-    /* blue-800 */
+    --color-ring: #1e3a8a;
+    /* blue-900 */
   }
 
   .dark {
