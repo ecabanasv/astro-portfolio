@@ -12,12 +12,16 @@ const defaultSite = repoSite
   ? repoSite.endsWith('/')
     ? repoSite
     : `${repoSite}/`
-  : githubPagesSite ?? 'https://demo-portfolio.example/';
+  : githubPagesSite ?? '';  // Empty string for local development
 
-const assetBase = new URL(defaultSite).href;
+const assetBase = defaultSite ? new URL(defaultSite).href : '';
 
 const resolveAsset = (asset: string) => {
   try {
+    // If no site is configured (local dev), use relative path
+    if (!assetBase) {
+      return asset.startsWith('/') ? asset : `/${asset}`;
+    }
     return asset.startsWith('http') ? asset : new URL(asset.replace(/^\/+/, ''), assetBase).href;
   } catch {
     return asset;
